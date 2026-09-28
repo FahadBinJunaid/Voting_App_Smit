@@ -1,0 +1,274 @@
+/* ===== Colors and sizes (change these to restyle the whole app) ===== */
+:root {
+  --page-top: #e8edf7;
+  --page-bottom: #f6f8fc;
+
+  --card: #ffffff;
+  --card-border: #e4e8f0;
+
+  --text: #16202f;
+  --text-soft: #64708a;
+  --text-faint: #8a95ab;
+
+  --field-bg: #fbfcfe;
+  --field-border: #d8dfeb;
+
+  --brand: #3b6ef5;
+  --yes: #15a34a;
+  --yes-dark: #128040;
+  --no: #e02424;
+  --no-dark: #b91c1c;
+
+  --radius: 16px;
+  --shadow: 0 1px 2px rgba(22, 32, 47, 0.04), 0 8px 24px rgba(22, 32, 47, 0.07);
+  --shadow-hover: 0 2px 4px rgba(22, 32, 47, 0.05), 0 14px 32px rgba(22, 32, 47, 0.13);
+}
+
+/* ===== Page ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background-color: var(--page-bottom);
+  background-image: linear-gradient(180deg, var(--page-top) 0%, var(--page-bottom) 420px);
+  background-attachment: fixed;
+}
+
+/* ===== Question + vote card ===== */
+.vote-card {
+  position: relative;
+  max-width: 620px;
+  margin: 64px auto 0;
+  padding: 40px 36px 36px;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* thin brand line at the top of the card */
+.vote-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand), #7c9dff);
+}
+
+.vote-card h1 {
+  margin: 0 0 26px;
+  font-size: 27px;
+  line-height: 1.45;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+/* ===== Name input ===== */
+.name-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.name-input::placeholder {
+  color: var(--text-faint);
+}
+
+.name-input:hover {
+  border-color: #c3cdde;
+}
+
+.name-input:focus {
+  border-color: var(--brand);
+  background: var(--card);
+  box-shadow: 0 0 0 4px rgba(59, 110, 245, 0.14);
+}
+
+/* ===== Buttons ===== */
+.vote-btn {
+  width: calc(50% - 6px);
+  margin: 22px 12px 0 0;
+  padding: 13px 20px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(22, 32, 47, 0.12);
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.vote-btn:last-child {
+  margin-right: 0;
+}
+
+.vote-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.vote-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(22, 32, 47, 0.15);
+}
+
+.vote-btn:focus-visible {
+  outline: 3px solid rgba(59, 110, 245, 0.45);
+  outline-offset: 2px;
+}
+
+.yes-btn {
+  background: var(--yes);
+}
+
+.yes-btn:hover {
+  background: var(--yes-dark);
+}
+
+.no-btn {
+  background: var(--no);
+}
+
+.no-btn:hover {
+  background: var(--no-dark);
+}
+
+/* ===== Submitted votes list ===== */
+.vote-list {
+  max-width: 620px;
+  margin: 26px auto 72px;
+}
+
+.vote-item {
+  position: relative;
+  margin-bottom: 12px;
+  padding: 18px 22px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(22, 32, 47, 0.04);
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+  animation: appear 0.28s ease-out;
+}
+
+.vote-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--brand);
+}
+
+/* small new item appears smoothly */
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vote-item:hover {
+  transform: translateY(-2px);
+  border-color: #ccd6e6;
+  box-shadow: var(--shadow);
+}
+
+.vote-item h1 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.vote-item h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ===== Small screens ===== */
+@media (max-width: 640px) {
+  .vote-card {
+    margin: 24px 16px 0;
+    padding: 28px 20px 24px;
+    border-radius: 14px;
+  }
+
+  .vote-card h1 {
+    margin-bottom: 20px;
+    font-size: 21px;
+  }
+
+  .vote-list {
+    margin: 20px 16px 48px;
+  }
+
+  .vote-btn {
+    width: 100%;
+    margin: 14px 0 0;
+  }
+}
+
+/* ===== Dark mode (follows the system setting) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-top: #14181f;
+    --page-bottom: #0e1116;
+
+    --card: #191e26;
+    --card-border: #2a313c;
+
+    --text: #eef1f6;
+    --text-soft: #a3adc0;
+    --text-faint: #7c8698;
+
+    --field-bg: #141920;
+    --field-border: #303844;
+  }
+
+  .name-input:hover {
+    border-color: #3d4756;
+  }
+
+  .vote-btn {
+    box-shadow: none;
+  }
+
+  .vote-item {
+    box-shadow: none;
+  }
+}
+
+/* Respect users who turn off animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+    transition: none;
+  }
+}
